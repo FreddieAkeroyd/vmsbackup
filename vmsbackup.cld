@@ -1,0 +1,13 @@
+! VMSBACKUP.CLD - command definition for VMSBACKUP 
+!
+! This is the OpenVMS command line definition module for use
+! with VMSBACKUP on OpenVMS.
+!
+DEFINE VERB VMSBACKUP
+  IMAGE VMSBACKUP
+    PARAMETER P1
+    PARAMETER P2
+    QUALIFIER SAVE_SET, PLACEMENT=local
+    QUALIFIER LIST, PLACEMENT=global
+    QUALIFIER FULL, PLACEMENT=global
+    QUALIFIER BRIEF, PLACEMENT=global

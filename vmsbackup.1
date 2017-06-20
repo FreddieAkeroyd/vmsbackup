@@ -1,0 +1,169 @@
+.TH VMSBACKUP 1 
+.SH NAME
+vmsbackup \- reads and extracts files from within an OpenVMS BACKUP utility 
+saveset file.
+.SH SYNOPSIS
+.B vmsbackup [OPTION]... [FILE]...
+.SH DESCRIPTION
+.I vmsbackup 
+reads an OpenVMS-generated BACKUP saveset or (where available) BACKUP tape, 
+converting the RMS-format files to Unix-format files (where feasible) and 
+writing the files to disc.  The default operation of the program is to read
+an entire disc saveset or entire tape saveset, extracting every file and 
+writing it to disc.  This behavior may be modified by the following options.
+.I FILE
+(optional) argument specifies one or more filenames to be
+selectively located within the tape or disc saveset, and processed.
+The name may contain the usual sh(1) meta-characters *?![] \nnn.
+.SH FUNCTION OPTIONS
+.TP 8
+Main operation mode:
+.TP 8
+.B t
+Produce a table of contents (a directory listing) on the standard output
+of the files on tape.
+.TP 8
+.B x
+extract the named files from the disk saveset or the tape.
+.SH OTHER OPTIONS
+.TP 8
+.B b blocksize
+Use blocksize as the blocksize to read the saveset with.
+.TP 8
+.B B
+Extract files in binary mode.
+.TP 8
+.B c
+Use complete filenames, including the version number.
+A colon and the octal version number will be appended to all filenames.
+A colon, rather than a semicolon, is used since the Unix Shell
+uses the semicolon as the line separator.
+Using a colon prevents the user from having to escape the semicolon
+when referencing the filename.
+This option is useful only when multiple versions of the same file
+are on a single tape or when a file of the same name already
+exists in the destination directory.
+The default is to ignore version numbers.
+.TP 8
+.B d
+use the directory structure from OpenVMS, the default value is off.
+.TP 8
+.B e
+Process all filename extensions.
+Since this program is mainly intended to move source code and possibly
+data from a DEC, Compaq or HP OpenVMS system to a Unix system, the default
+behavior ignores all files whose filename extension specifies a 
+system-dependent or RMS-specific data file.  The following file types
+which will be ignored, unless the
+.B e
+option is specified, are
+.IP "" 10
+dir	directory file
+.br
+dmp	dump file
+.br
+exe     OpenVMS executable file
+.br
+hlb     Help Library file
+.br
+lib     object library file
+.br
+mlb     Macro32 Library file
+.br
+obj     object file
+.br
+odl     RSX-11M overlay description file
+.br
+olb     Object Library file
+.br
+pcsi    Software Installation Kit
+.br
+pcsi$compressed Software Installation Kit
+.br
+pcsi-dcx_axpexe Software Installation Kit
+.br
+pcsi-dcx-vaxexe Software Installation Kit
+.br
+pmd     RSX-11 post mortem dump file
+.br
+stb     Symbol table file
+.br
+sys     bootable system file
+.br
+tlb     text Library file
+.br
+tsk     RSX-11M executable task file
+.PP
+.TP 8
+.B f
+Use the next argument in the command line as the saveset filename
+or the tape device to be used, rather than the default.
+.sp
+If vmsbackup is compiled with the remote tape option
+and the file name has the form
+.IR system [. user ]:/dev/???
+.I vmsbackup
+will use the tape drive /dev/??? on the remote system
+.IR system ,
+via
+.IR rsh (1),
+and
+.IR rmt (8).
+The optional
+.I user
+portion of the pathname specifies the login name to use on the
+remote system.
+If it is not supplied, the current user's login name will be used.
+In all the cases, the user must have the appropriate
+permissions on the remote machine, in order to use this facility.
+The default is
+.I /dev/rmt8
+(drive 0, raw mode, 1600 bpi).
+This must be a raw mode tape device.
+.TP 8
+.B s saveset
+Process only the given saveset number.
+.TP 8
+.B o filename
+Extract into the given file.
+.TP 8
+.B v
+Verbose output.
+Normally
+.I vmsbackup 
+does its work silently.
+The verbose option will cause the filenames of the files being read from
+tape to disk to be output on the standard output.
+.TP 8
+.B V
+Display the version number for the
+.I vmsbackup
+tool.
+.TP 8
+.B w
+.I vmsbackup
+prints the action to be taken followed by file name, then
+wait for user confirmation. If a word beginning with `y'
+is given, the action is done. Any other input means don't do it.
+.SH EXAMPLES
+.I vmsbackup -t -f saveset.bck
+lists the file contents of the specified BACKUP saveset.
+.SH FILES
+/dev/rmt\fIx\fP
+.SH SEE ALSO
+rmtops(3)
+.SH BUGS
+The filename match uses the complete VMS file names.
+
+.SH AUTHOR
+John Douglas Carey
+.br
+Sven-Ove Westberg
+.br
+Timothy Stark
+.br
+S.J. Tappin 
+.br
+Kevin Handy
+.br
+Stephen Hoffman
