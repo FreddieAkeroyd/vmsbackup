@@ -61,7 +61,8 @@ MANDIR=/usr/man/man$(MANSEC)
 DISTFILES=README vmsbackup.1 Makefile vmsbackup.c vmsconstants.h match.c NEWS build.com dclmain.c getoptmain.c vmsbackup.cld vmsbackup.h AAAREADME.TXT
 
 
-CFLAGS = $(LONGOPT)
+CFLAGS = $(LONGOPT) # -g -O0
+LDFLAGS=#-g
 
 .SUFFIXES: .c .1 .o .ps .pdf .txt
 
