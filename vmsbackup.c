@@ -259,9 +259,9 @@ unsigned long long
   getu64 (unsigned char *addr)  {
     return (*(unsigned long long int *) addr);
  }
-unsigned long
+unsigned int
  getu32 (unsigned char *addr) {
-    return *(unsigned long int *) addr;
+    return *(unsigned int *) addr;
  }
 unsigned int
  getu16 (unsigned char *addr) {
@@ -290,9 +290,9 @@ unsigned long long
   return big_endian;
  }
 
-unsigned long
+unsigned 
  getu32 (unsigned char *addr) {
-    return (((((unsigned long)addr[3] << 8) | addr[2]) << 8)
+    return (((((unsigned)addr[3] << 8) | addr[2]) << 8)
               | addr[1]) << 8 | addr[0];
  }
 
