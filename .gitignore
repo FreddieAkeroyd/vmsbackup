@@ -1,0 +1,6 @@
+*.o
+vmsbackup
+vmsbackup.pdf
+vmsbackup.ps
+vmsbackup.txt
+vmsbackupver.h
