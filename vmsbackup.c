@@ -632,7 +632,7 @@ openfile(char *req_file_name, int struclev)
        printf("extract %s [ny]: ",filename);
 
        fflush(stdout);
-       gets(ans);
+       fgets(ans, sizeof(ans), stdin);
 
        if(*ans != 'y') {
           procf = 0;
