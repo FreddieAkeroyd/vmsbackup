@@ -1,3 +1,8 @@
+Changes in github.com/FreddieAkeroyd/vmsbackup
+  22-Jun-2017
+
+* Fixes for running on 64bit Linux and MinGW on windows
+ 
 Changes in 4.4.3hb
   7-Oct-2016
 
